@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cyclistes</title>
+    </h:head>
+    <h:body>
+        <h1 align="center">Cyclistes</h1><br/>
+
+        <p:growl/>
+
+        <h:form>
+            <p:button icon="fa fa-fw fa-plus" value="Ajouter" outcome="EditCyclist.jsf"/>
+            <br/><br/>
+            <div align="center">
+
+                <p:poll interval="3" update="tabCyclist"/>
+
+                <p:dataTable paginator="true" value="#{cyclistManagedBean.cyclists}" id="tabCyclist" var="cyclist">                                                
+                    <p:column headerText="ObjectId" filterBy="cyclist.id">
+                        <p:outputLabel value="#{cyclist.id}" />
+                    </p:column>
+                    <p:column headerText="Photo" filterBy="cyclist.picture">                                
+                        <p:outputLabel value="#{cyclist.picture}" />
+                    </p:column>
+                    <p:column headerText="Nom" filterBy="cyclist.lastName">                                
+                        <p:outputLabel value="#{cyclist.lastName}" />
+                    </p:column>
+                    <p:column headerText="Prénom" filterBy="cyclist.firstName">                                
+                        <p:outputLabel value="#{cyclist.firstName}" />
+                    </p:column>
+                    <p:column width="250px" headerText="Email" filterBy="cyclist.email">                                
+                        <p:outputLabel value="#{cyclist.email}" />
+                    </p:column>
+                    <p:column width="50px" headerText="Statut" filterBy="cyclist.onLine">                                
+                        <p:outputLabel value="#{cyclist.onLine}" />
+                    </p:column>
+                    <p:column width="100px" headerText="Latitude" filterBy="cyclist.latitude">
+                        <p:outputLabel value="#{cyclist.latitude}" />
+                    </p:column>
+                    <p:column width="100px" headerText="Longitude" filterBy="cyclist.longitude">
+                        <p:outputLabel value="#{cyclist.longitude}" />
+                    </p:column>
+                    <p:column width="400px" colspan="3">
+                        <p:commandButton icon="fa fa-fw fa-heartbeat" ajax="false" value="Activités" action="ListActivity.jsf?faces-redirect=true"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <p:commandButton icon="fa fa-fw fa-map-marker" value="Map" action="map.jsf?faces-redirect=true">
+                            <f:actionListener binding="#{cyclistMapManagedBean.map(cyclist)}"/>
+                        </p:commandButton>
+                        <br/>
+                        <p:commandButton icon="fa fa-fw fa-edit" value="Editer" action="#{cyclistManagedBean.update(cyclist)}"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <p:commandButton icon="fa fa-fw fa-trash" onclick="javascript:return confirm('Voulez-vous vraiment supprimer #{cyclist.lastName} #{cyclist.firstName} ?');" ajax="false" value="Supprimer" action="#{cyclistManagedBean.delete(cyclist.id)}"/>                        
+                    </p:column>                
+                </p:dataTable>
+            </div>   
+        </h:form>
+
+    </h:body>    
+</html>
+
