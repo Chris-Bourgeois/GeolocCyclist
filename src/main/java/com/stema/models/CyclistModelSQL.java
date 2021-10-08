@@ -25,5 +25,16 @@ public class CyclistModelSQL {
     
     public void create(Cyclist cyclist) {
         em.persist(cyclist);
-    } 
+    }
+    
+    public void update(Cyclist newCyclist)
+    {
+        newCyclist = em.merge(newCyclist);
+        em.refresh(newCyclist);
+    }
+    
+    public void delete(Cyclist cyclist){
+        cyclist = em.merge(cyclist);
+        em.remove(cyclist);
+    }
 }
