@@ -9,6 +9,7 @@ import com.stema.beans.Cyclist;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -29,8 +30,15 @@ public class CyclistModelSQL {
     
     public void update(Cyclist newCyclist)
     {
-        newCyclist = em.merge(newCyclist);
-        em.refresh(newCyclist);
+        Cyclist cyclist = em.find(Cyclist.class, newCyclist.getId());
+        
+        cyclist.setEmail(newCyclist.getEmail());
+        cyclist.setFirstName(newCyclist.getFirstName());
+        cyclist.setLastName(newCyclist.getLastName());
+        cyclist.setLatitude(newCyclist.getLatitude());
+        cyclist.setLongitude(newCyclist.getLongitude());
+        cyclist.setPassword(newCyclist.getPassword());
+        cyclist.setPicture(newCyclist.getPicture());        
     }
     
     public void delete(Cyclist cyclist){
