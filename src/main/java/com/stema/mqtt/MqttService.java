@@ -38,8 +38,6 @@ public class MqttService implements MqttCallback {
     @PostConstruct
     public void init() {
         try {
-            System.out.println("DANS INIT MQTT SERVICE");
-
             client = new MqttClient("tcp://localhost:1883", MqttClient.generateClientId(), new MemoryPersistence());
 
             MqttConnectOptions connOpts = new MqttConnectOptions();

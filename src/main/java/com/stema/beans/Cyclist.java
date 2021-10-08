@@ -5,15 +5,28 @@
  */
 package com.stema.beans;
 
+import com.stema.converter.IdMongoDBConverter;
+import com.stema.converter.IdSQLDBConverter;
+import java.io.Serializable;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import org.bson.types.ObjectId;
 
 /**
  *
  * @author bourg
  */
-public class Cyclist {
+
+//table dans la bdd
+@Entity
+public class Cyclist implements Serializable {
     
+    //clé primaire
+    @Id
+    @Convert(converter = IdSQLDBConverter.class)
     private ObjectId _id;
+            
     private String lastName;
     private String firstName;
     private boolean onLine;
@@ -112,5 +125,13 @@ public class Cyclist {
     @Override
     public String toString() {
         return "Cyclist{" + "_id=" + _id + ", lastName=" + lastName + ", firstName=" + firstName + ", onLine=" + onLine + ", picture=" + picture + ", email=" + email + ", password=" + password + ", latitude=" + latitude + ", longitude=" + longitude + '}';
+    }
+
+    public ObjectId get_id() {
+        return _id;
+    }
+
+    public void set_id(ObjectId _id) {
+        this._id = _id;
     }
 }

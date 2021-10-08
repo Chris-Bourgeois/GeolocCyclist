@@ -7,6 +7,7 @@ package com.stema.managedbeans;
 
 import com.stema.beans.Cyclist;
 import com.stema.models.CyclistModel;
+import com.stema.models.CyclistModelSQL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -27,8 +28,13 @@ public class CyclistManagedBean {
     private Cyclist cyclist = new Cyclist();
     private List<Cyclist> cyclists = new ArrayList<>();
 
+    //mon modele Mongo
     @EJB
     private CyclistModel cyclistModel;
+    
+    //mon modele SQL
+    @EJB
+    private CyclistModelSQL cyclistModelSQL;
 
     public CyclistManagedBean() {
     }
