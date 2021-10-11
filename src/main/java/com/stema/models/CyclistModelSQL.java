@@ -9,7 +9,6 @@ import com.stema.beans.Cyclist;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.bson.types.ObjectId;
 
 /**
  *

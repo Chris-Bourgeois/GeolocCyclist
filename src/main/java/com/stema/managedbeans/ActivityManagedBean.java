@@ -7,11 +7,14 @@ package com.stema.managedbeans;
 
 import com.stema.beans.Activity;
 import com.stema.models.ActivityModel;
+//import com.stema.models.ActivityModelSQL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import org.bson.types.ObjectId;
 
 /**
@@ -27,6 +30,9 @@ public class ActivityManagedBean {
     
     @EJB
     private ActivityModel activityModel;
+    
+    /*@EJB
+    private ActivityModelSQL activityModelSQL;*/
       
     public ActivityManagedBean() {
     }
@@ -47,8 +53,18 @@ public class ActivityManagedBean {
         this.activities = activities;
     }
     
+    public void create() {
+        
+            activityModel.create(activity);
+            //activityModelSQL.create(activity);
+            
+            activity = new Activity();
+    }
+    
     public void delete(ObjectId idActivity)
     {
+        FacesMessage success_delete = new FacesMessage(FacesMessage.SEVERITY_INFO, "Suppression réussie.", null);
+        FacesContext.getCurrentInstance().addMessage(null, success_delete);
         activityModel.delete(idActivity);
     }
 }

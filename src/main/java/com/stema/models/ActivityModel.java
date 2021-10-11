@@ -10,7 +10,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import com.stema.beans.Activity;
-import com.stema.beans.Cyclist;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -45,6 +44,14 @@ public class ActivityModel {
                 
         mongoDatabase = mongoClient.getDatabase("GeolocCyclist").withCodecRegistry(codecRegistry);
         collection = mongoDatabase.getCollection("activity", Activity.class);
+    }
+    
+    /**
+     * fonction générique pour créer un cycliste
+     * @param activity
+     */
+    public void create(Activity activity) {
+        collection.insertOne(activity);
     }
     
     /**

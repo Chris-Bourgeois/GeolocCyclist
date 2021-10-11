@@ -91,7 +91,8 @@ public class CyclistManagedBean {
         cyclistModelSQL.delete(deletedCyclist);
     }
 
-    public void update(Cyclist after) {
+    public String update(Cyclist after) {
         this.cyclist = after;
+        return "EditCyclist";
     }
 }

@@ -5,16 +5,26 @@
  */
 package com.stema.beans;
 
+import com.stema.converter.IdSQLDBConverter;
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import org.bson.types.ObjectId;
 
 /**
  *
  * @author bourg
  */
-public class Activity {
+@Entity
+public class Activity implements Serializable {
     
+    @Id
+    @Convert(converter = IdSQLDBConverter.class)
     private ObjectId _id;
+    
+    private String cyclistId;
     private Date startTime;
     private Date stopTime;
 
@@ -33,6 +43,14 @@ public class Activity {
 
     public void setId(ObjectId _id) {
         this._id = _id;
+    }
+
+    public String getCyclistId() {
+        return cyclistId;
+    }
+
+    public void setCyclistId(String cyclistId) {
+        this.cyclistId = cyclistId;
     }
 
     public Date getStartTime() {
@@ -55,4 +73,12 @@ public class Activity {
     public String toString() {
         return "Activity{" + "_id=" + _id + ", startTime=" + startTime + ", stopTime=" + stopTime + '}';
     }    
+
+    public ObjectId get_id() {
+        return _id;
+    }
+
+    public void set_id(ObjectId _id) {
+        this._id = _id;
+    }
 }
