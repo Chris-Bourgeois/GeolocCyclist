@@ -64,8 +64,7 @@ public class CyclistManagedBean {
         this.cyclistModel = cyclistModel;
     }
 
-    public String edit() {
-        String location;
+    public void edit() {
         
         if (cyclist.getId() == null) {
             //NoSQL
@@ -74,17 +73,14 @@ public class CyclistManagedBean {
             cyclistModelSQL.create(cyclist);
             FacesMessage success_create = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ajout réussi de : " + cyclist.getLastName() + " " + cyclist.getFirstName(), null);
             FacesContext.getCurrentInstance().addMessage(null, success_create);
-            location = null;
         } else {
             cyclistModel.update(cyclist);
             cyclistModelSQL.update(cyclist);
             FacesMessage success_edit = new FacesMessage(FacesMessage.SEVERITY_INFO, "Modification réussie de : " + cyclist.getLastName() + " " + cyclist.getFirstName(), null);
             FacesContext.getCurrentInstance().addMessage(null, success_edit);
-            location = "ListCyclist";
         }
 
         cyclist = new Cyclist();
-        return location;
     }
 
     public void delete(ObjectId idCyclist) {   
@@ -95,8 +91,7 @@ public class CyclistManagedBean {
         cyclistModelSQL.delete(deletedCyclist);
     }
 
-    public String update(Cyclist after) {
+    public void update(Cyclist after) {
         this.cyclist = after;
-        return "EditCyclist";
     }
 }

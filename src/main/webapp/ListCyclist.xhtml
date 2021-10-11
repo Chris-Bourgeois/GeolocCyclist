@@ -51,7 +51,9 @@
                             <f:actionListener binding="#{cyclistMapManagedBean.map(cyclist)}"/>
                         </p:commandButton>
                         <br/>
-                        <p:commandButton icon="fa fa-fw fa-edit" value="Editer" action="#{cyclistManagedBean.update(cyclist)}"/>
+                        <p:commandButton icon="fa fa-fw fa-edit" value="Editer" action="EditCyclist.jsf?faces-redirect=true">
+                            <f:actionListener binding="#{cyclistManagedBean.update(cyclist)}"/>
+                        </p:commandButton>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <p:commandButton icon="fa fa-fw fa-trash" onclick="javascript:return confirm('Voulez-vous vraiment supprimer #{cyclist.lastName} #{cyclist.firstName} ?');" ajax="false" value="Supprimer" action="#{cyclistManagedBean.delete(cyclist.id)}"/>                        
                     </p:column>                

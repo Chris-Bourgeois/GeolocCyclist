@@ -25,7 +25,9 @@
                     Mot de passe : <p:password value="#{cyclistManagedBean.cyclist.password}" required="true" label="Mot de passe"/>
                     Latitude : <p:inputText value="#{cyclistManagedBean.cyclist.latitude}" required="true" label="Latitude"/>
                     Longitude : <p:inputText value="#{cyclistManagedBean.cyclist.longitude}" required="true" label="Longitude"/>
-                    <p:commandButton action="#{cyclistManagedBean.edit()}" value="Editer" ajax="false"/>
+                    <p:commandButton action="ListCyclist.jsf?faces-redirect=true" value="Editer" ajax="false">
+                        <f:actionListener binding="#{cyclistManagedBean.edit()}"/>
+                    </p:commandButton>
                     <p:button outcome="ListCyclist.jsf" value="Retour"/>
                 </p:panelGrid>
             </h:form>
