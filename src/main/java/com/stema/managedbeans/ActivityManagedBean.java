@@ -7,33 +7,33 @@ package com.stema.managedbeans;
 
 import com.stema.beans.Activity;
 import com.stema.models.ActivityModel;
-//import com.stema.models.ActivityModelSQL;
+import com.stema.models.ActivityModelSQL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import org.bson.types.ObjectId;
 
 /**
  *
  * @author bourg
  */
 @Named(value = "activityManagedBean")
-@Dependent
+@RequestScoped
 public class ActivityManagedBean {
 
     private Activity activity = new Activity();
     private List<Activity> activities = new ArrayList<>();
-    
+
     @EJB
     private ActivityModel activityModel;
-    
-    /*@EJB
-    private ActivityModelSQL activityModelSQL;*/
-      
+
+    @EJB
+    private ActivityModelSQL activityModelSQL;
+
     public ActivityManagedBean() {
     }
 
@@ -52,19 +52,24 @@ public class ActivityManagedBean {
     public void setActivities(List<Activity> activities) {
         this.activities = activities;
     }
-    
-    public void create() {
-        
-            activityModel.create(activity);
-            //activityModelSQL.create(activity);
-            
-            activity = new Activity();
+
+    public void start() {
+
+        activity.setStartTime(LocalDate.now());
+        activityModel.create(activity);
+        activityModelSQL.create(activity);
     }
     
-    public void delete(ObjectId idActivity)
+    public void stop()
     {
+        activityModelSQL.stop(activity);
+        activity = new Activity();
+    }
+
+    public void delete(Activity activity) {
         FacesMessage success_delete = new FacesMessage(FacesMessage.SEVERITY_INFO, "Suppression réussie.", null);
         FacesContext.getCurrentInstance().addMessage(null, success_delete);
-        activityModel.delete(idActivity);
+        activityModel.delete(activity);
+        activityModelSQL.delete(activity);
     }
 }

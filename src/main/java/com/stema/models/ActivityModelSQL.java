@@ -6,6 +6,7 @@
 package com.stema.models;
 
 import com.stema.beans.Activity;
+import java.time.LocalDate;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +26,13 @@ public class ActivityModelSQL {
     
     public void create(Activity activity) {
         em.persist(activity);
+    }
+    
+    public void stop(Activity finishedActivity)
+    {
+        Activity activity = em.find(Activity.class, finishedActivity.getId());
+        
+        activity.setStopTime(LocalDate.now());    
     }
     
     public void delete(Activity activity){

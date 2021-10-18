@@ -24,7 +24,7 @@
                         <p:outputLabel value="#{activity.stopTime}" />
                     </p:column>
                     <p:column>
-                        <p:commandButton onclick="javascript:return confirm('Voulez-vous vraiment supprimer cette activité ?');" ajax="false" value="Supprimer" action="#{activityManagedBean.delete(activity.id)}"/>
+                        <p:commandButton onclick="javascript:return confirm('Voulez-vous vraiment supprimer cette activité ?');" ajax="false" value="Supprimer" action="#{activityManagedBean.delete(activity)}"/>
                     </p:column>                
                 </p:dataTable>
             </div>

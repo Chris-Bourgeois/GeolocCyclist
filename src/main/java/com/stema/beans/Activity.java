@@ -7,6 +7,7 @@ package com.stema.beans;
 
 import com.stema.converter.IdSQLDBConverter;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -25,13 +26,13 @@ public class Activity implements Serializable {
     private ObjectId _id;
     
     private String cyclistId;
-    private Date startTime;
-    private Date stopTime;
+    private LocalDate startTime;
+    private LocalDate stopTime;
 
     public Activity() {
     }
 
-    public Activity(ObjectId _id, Date startTime, Date stopTime) {
+    public Activity(ObjectId _id, LocalDate startTime, LocalDate stopTime) {
         this._id = _id;
         this.startTime = startTime;
         this.stopTime = stopTime;
@@ -53,19 +54,19 @@ public class Activity implements Serializable {
         this.cyclistId = cyclistId;
     }
 
-    public Date getStartTime() {
+    public LocalDate getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDate startTime) {
         this.startTime = startTime;
     }
 
-    public Date getStopTime() {
+    public LocalDate getStopTime() {
         return stopTime;
     }
 
-    public void setStopTime(Date stopTime) {
+    public void setStopTime(LocalDate stopTime) {
         this.stopTime = stopTime;
     }
 

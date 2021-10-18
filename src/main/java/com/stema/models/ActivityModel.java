@@ -66,10 +66,10 @@ public class ActivityModel {
     
     /**
      * fonction générique pour supprimer une activité
-     * @param id 
+     * @param activity  
      */
-    public void delete(ObjectId id){
-        Document document = new Document("_id", id);
+    public void delete(Activity activity){
+        Document document = new Document("_id", activity.getId());
         collection.deleteOne(document);
     }
     
